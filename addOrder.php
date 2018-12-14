@@ -46,7 +46,7 @@ include 'modal/productsOrder.php';
 
 		<div class="form-group submitButtonFooter">
 			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" id="createOrderBtn" data-loading-text="Cargando..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Guardar cambios</button>
+			      <button type="submit" id="createOrderBtn" data-loading-text="Cargando..." class="btn btn-success"><i class="glyphicon glyphicon-ok-sign"></i> Agregar venta</button>
 
 			      <button type="reset" class="btn btn-default" onclick="resetOrderForm()"><i class="glyphicon glyphicon-erase"></i> Reiniciar</button>
 

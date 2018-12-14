@@ -7,13 +7,13 @@ $sql = "SELECT * FROM product WHERE status = 1";
 $query = $connect->query($sql);
 $countProduct = $query->num_rows;
 
-$orderSql = "SELECT * FROM orders WHERE order_status = 1";
+$orderSql = "SELECT * FROM orders WHERE order_status = 1 and paymentStatus < 3";
 $orderQuery = $connect->query($orderSql);
 $countOrder = $orderQuery->num_rows;
 
 $totalRevenue = 0;
 while ($orderResult = $orderQuery->fetch_assoc()) {
-	$totalRevenue += $orderResult['paid'];
+	$totalRevenue += $orderResult['total'];
 }
 
 $lowStockSql = "SELECT * FROM product WHERE quantity <= 3 AND status = 1";

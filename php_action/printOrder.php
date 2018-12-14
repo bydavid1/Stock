@@ -4,22 +4,25 @@ require_once 'core.php';
 
 $orderId = $_POST['orderId'];
 
-$sql = "SELECT order_date, client_name, client_contact, sub_total, vat, total_amount, discount, grand_total, paid, due FROM orders WHERE order_id = $orderId";
+$sql = "SELECT order_date, client_name, sub_total, discount, paymentStatus, total FROM orders WHERE order_id = $orderId";
 
 $orderResult = $connect->query($sql);
 $orderData = $orderResult->fetch_array();
 
 $orderDate = $orderData[0];
-$clientName = $orderData[1];
-$clientContact = $orderData[2]; 
-$subTotal = $orderData[3];
-$vat = $orderData[4];
-$totalAmount = $orderData[5]; 
-$discount = $orderData[6];
-$grandTotal = $orderData[7];
-$paid = $orderData[8];
-$due = $orderData[9];
+$clientName = $orderData[1]; 
+$subTotal = $orderData[2]; 
+$discount = $orderData[3];
+$payment = $orderData[4];
+$total = $orderData[5];
 
+if($payment == 1) { 		
+	$paymentStatus = "<label class='label label-success'>Pago completo</label>";
+} else if($payment== 2) { 		
+	$paymentStatus = "<label class='label label-info'>Pago por adelantado</label>";
+} else { 		
+	$paymentStatus = "<label class='label label-warning'>No pagado</label>";
+} // /else
 
 $orderItemSql = "SELECT order_item.product_id, order_item.rate, order_item.quantity, order_item.total,
 product.product_name FROM order_item
@@ -36,7 +39,7 @@ $orderItemResult = $connect->query($orderItemSql);
 			<center>
 				Fecha : '.$orderDate.'
 				<center>Cliente : '.$clientName.'</center>
-				Teléfono : '.$clientContact.'
+				Teléfono : Desconocido
 			</center>		
 			</th>
 				
@@ -83,37 +86,33 @@ $orderItemResult = $connect->query($orderItemSql);
 
 		<tr>
 			<th>IVA (13%)</th>
-			<th>'.number_format($vat,2).'</th>			
-		</tr>
-
-		<tr>
-			<th>Total neto</th>
-			<th>'.number_format($totalAmount,2).'</th>			
-		</tr>	
-
-		<tr>
-			<th>Descuento</th>
 			<th>'.number_format($discount,2).'</th>			
 		</tr>
 
 		<tr>
 			<th>Total</th>
-			<th>'.number_format($grandTotal,2).'</th>			
+			<th>'.number_format($total,2).'</th>			
 		</tr>
 
 		<tr>
-			<th>Pagado</th>
-			<th>'.number_format($paid,2).'</th>			
+			<th>Estado</th>
+			
+		    <th>'.$paymentStatus.'</th>			
 		</tr>
-
-		<tr>
-			<th>Pendiente</th>
-			<th>'.number_format($due,2).'</th>			
-		</tr>
+		
 	</tbody>
 </table>
  ';
 
+ /*<tr>
+ <th>Pagado</th>
+ <th>'.number_format($paid,2).'</th>			
+</tr>
+
+<tr>
+ <th>Pendiente</th>
+ <th>'.number_format($due,2).'</th>			
+</tr>*/
 
 $connect->close();
 
