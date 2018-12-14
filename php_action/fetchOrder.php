@@ -2,7 +2,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT order_id, order_date, client_name, client_contact, payment_status FROM orders WHERE order_status = 1";
+$sql = "SELECT order_id, order_date, client_name, sub_total, discount, total, paymentStatus FROM orders WHERE order_status = 1";
 $result = $connect->query($sql);
 
 
@@ -23,9 +23,9 @@ if($result->num_rows > 0) {
 
 
  	// active 
- 	if($row[4] == 1) { 		
+ 	if($row[6] == 1) { 		
  		$paymentStatus = "<label class='label label-success'>Pago completo</label>";
- 	} else if($row[4] == 2) { 		
+ 	} else if($row[6] == 2) { 		
  		$paymentStatus = "<label class='label label-info'>Pago por adelantado</label>";
  	} else { 		
  		$paymentStatus = "<label class='label label-warning'>No pagado</label>";
@@ -48,17 +48,21 @@ if($result->num_rows > 0) {
 	</div>';		
 
  	$output['data'][] = array( 		
- 		// image
- 		$x,
+ 		
+ 		$row[0],
  		// order date
  		$row[1],
  		// client name
  		$row[2], 
- 		// client contact
+		 //total de prod
+		$itemCountRow,
+        //sub total
  		$row[3], 		 	
- 		$itemCountRow, 		 	
- 		$paymentStatus,
- 		// button
+        //total
+		$row[5], 
+        //pago
+		$paymentStatus,
+ 		//boton
  		$button 		
  		); 	
  	$x++;

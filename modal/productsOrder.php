@@ -19,9 +19,9 @@
 						<tr>							
 							<th>Producto</th>
 							<th>Precio</th>							
-							<th>Stock</th>
 							<th>Fabricante</th>
 							<th>Categoría</th>
+							<th>Cantidad</th>
 							<th style="width:15%;">Agregar</th>
 						</tr>
 					</thead>

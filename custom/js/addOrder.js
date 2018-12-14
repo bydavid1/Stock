@@ -37,6 +37,7 @@ $(document).ready(function() {
 			var subTotal = $("#subTotal").val();
 			var iva = $("#iva").val();
 			var total = $("#total").val();
+			var paymentStatus = $("#paymentStatus").val();
 
 			// form validation 
 			if(orderDate == "") {
@@ -70,12 +71,18 @@ $(document).ready(function() {
 			} else {
 				$('#total').closest('.form-group').addClass('has-success');
 			} // /else
+			if(paymentStatus == "") {
+				$("#paymentStatus").after('<p class="text-danger"> Este campo es obligatorio </p>');
+				$('#paymentStatus').closest('.form-group').addClass('has-error');
+			} else {
+				$('#paymentStatus').closest('.form-group').addClass('has-success');
+			} // /else
 				
-			if(orderDate  && clientName && subTotal && iva && total) {
+			if(orderDate  && clientName && subTotal && iva && total && paymentStatus) {
 			$.ajax({
 				url : form.attr('action'),
 				type: form.attr('method'),
-				data: "orderDate="+orderDate+"&&clientName="+clientName+"&&subTotal="+subTotal+"&&iva="+iva+"&&total="+total,					
+				data: "orderDate="+orderDate+"&&clientName="+clientName+"&&subTotal="+subTotal+"&&iva="+iva+"&&total="+total+"&&paymentStatus="+paymentStatus,					
 				success:function(response) {
 					
 					$(".text-danger").remove();
@@ -87,8 +94,14 @@ $(document).ready(function() {
 						'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
 						'<strong><i class="glyphicon glyphicon-ok"></i></strong>'+ response.messages +'</div>');
 						
-					} else {
-						alert(response.messages);								
+					} else if(response.success == false) {
+						$(".success-messages").html('<div class="alert alert-danger">'+
+						'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+						'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong>'+ response.messages +'</div>');								
+					}else {
+						$(".success-messages").html('<div class="alert alert-info">'+
+						'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+						'<strong><i class="glyphicon glyphicon-info-sign"></i></strong>'+ response +'</div>');
 					}
 						
 				} // /response
@@ -106,10 +119,19 @@ $(document).ready(function() {
 });
 
 function agregar(id){
+	var cantidad = document.getElementById('cantidad_'+id).value;
+	//Inicia validacion
+	if (isNaN(cantidad))
+	{
+	alert('Esto no es un numero');
+	document.getElementById('cantidad_'+id).focus();
+	return false;
+	}
+	//Fin validacion
 	$.ajax({
 		type: "POST",
 		url: "./php_action/addOrder.php",
-		data: "id="+id,
+		data: "id="+id+"&&cantidad="+cantidad,
 		 beforeSend: function(){
 			$("#resultados").html("Mensaje: Cargando...");
 		  },

@@ -74,7 +74,17 @@ $sumador_total=0;
 	</td>
 	<td></td>
 </tr>
-
+<tr>
+<td class='text-right' colspan=4>ESTADO $</td>
+	<td class="pull-right"> 
+	<select class="form-control text-right" name="paymentStatus" id="paymentStatus">
+				      	<option value="">-- Selecciona --</option>
+				      	<option value="1" >Pago completo</option>
+				      	<option value="2" >Pago por adelantado</option>
+				      	<option value="3" >No pagado</option>
+	</select>
+    </td>
+</tr>
 </table>
 
 

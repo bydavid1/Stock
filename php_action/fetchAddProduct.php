@@ -3,7 +3,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT product.product_id, product.product_name, product.quantity, product.rate,  
+$sql = "SELECT product.product_id, product.product_name, product.rate,  
 brands.brand_name, categories.categories_name FROM product 
 INNER JOIN brands ON product.brand_id = brands.brand_id 
 INNER JOIN categories ON product.categories_id = categories.categories_id  
@@ -18,24 +18,24 @@ if($result->num_rows > 0) {
  while($row = $result->fetch_array()) {
  	$productId = $row[0];
 
- 	$button = "<a class='btn btn-info' href='#' onclick='agregar(".$productId.")'><i class='glyphicon glyphicon-plus'></i></a>";
+	 $quantity = "<input type='text' class='form-control'  id='cantidad_".$productId."'  value='1' >";
+	 $button = "<a class='btn btn-info' href='#' onclick='agregar(".$productId.")'><i class='glyphicon glyphicon-shopping-cart'></i></a>";
 
-
-	$brand = $row[4];
-	$category = $row[5];
+	$brand = $row[3];
+	$category = $row[4];
  	$output['data'][] = array( 		
  		// product name
  		$row[1], 
  		// rate
- 		$row[3],
- 		// quantity 
- 		$row[2], 		 	
+ 		$row[2],		 	
  		// brand
  		$brand,
  		// category 		
- 		$category,
+		 $category,
+	    //quantity
+		 $quantity,
  		// button
- 		$button 		
+ 		 $button 		
  		); 	
  } // /while 
 

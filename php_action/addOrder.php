@@ -4,13 +4,14 @@ require_once 'core.php'; //Conexion y verificacion de sesion
 
 $session_id= session_id();
 if (isset($_POST['id'])){$id=$_POST['id'];}
+if (isset($_POST['cantidad'])){$cantidad=$_POST['cantidad'];}
 
-if (!empty($id))
+if (!empty($id) and !empty($cantidad))
 {
 $productData = mysqli_query($connect, "SELECT rate FROM product WHERE product_id = '$id'");
 $data = mysqli_fetch_array($productData);
 $precio_venta = $data['rate'];
-$insert_tmp=mysqli_query($connect, "INSERT INTO tmp (product_id,quantity_tmp,rate_tmp,session_id) VALUES ('$id','1','$precio_venta','$session_id');");
+$insert_tmp=mysqli_query($connect, "INSERT INTO tmp (product_id,quantity_tmp,rate_tmp,session_id) VALUES ('$id','$cantidad','$precio_venta','$session_id');");
 
 }
 if (isset($_GET['id']))//codigo elimina un elemento del array
@@ -97,7 +98,17 @@ $sumador_total=0;
 	</td>
 	<td></td>
 </tr>
-
+<tr>
+<td class='text-right' colspan=4>ESTADO $</td>
+	<td class="pull-right"> 
+	<select class="form-control text-right" name="paymentStatus" id="paymentStatus">
+				      	<option value="">-- Selecciona --</option>
+				      	<option value="1" >Pago completo</option>
+				      	<option value="2" >Pago por adelantado</option>
+				      	<option value="3" >No pagado</option>
+	</select>
+    </td>
+</tr>
 </table>
 
 
