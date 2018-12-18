@@ -24,7 +24,7 @@ $valid['success'] = array('success' => false, 'messages' => array());
 	}
 
 
-	$data = "SELECT tmp.`quantity_tmp`, tmp.`product_id`,tmp.`rate_tmp`,product.`product_name` FROM tmp INNER JOIN product ON tmp.`product_id` = product.`product_id` WHERE tmp.session_id = '".$session_id."'";
+	$data = "SELECT tmp.`quantity_tmp`, tmp.`product_id`,tmp.`rate_tmp`,tmp.`total_tmp`,product.`product_name` FROM tmp INNER JOIN product ON tmp.`product_id` = product.`product_id` WHERE tmp.session_id = '".$session_id."'";
    
 	$result = $connect->query($data);
 	while($products = $result->fetch_array()){
@@ -44,7 +44,7 @@ $valid['success'] = array('success' => false, 'messages' => array());
 
 				// add into order_item
 				$orderItemSql = "INSERT INTO order_item (order_id, product_id, quantity, rate, total, order_item_status) 
-				VALUES (".$order_id." , ".$products['product_id'].", ".$products['quantity_tmp'].", ".$products['rate_tmp'].", ".$products['rate_tmp'].", 1)";
+				VALUES (".$order_id." , ".$products['product_id'].", ".$products['quantity_tmp'].", ".$products['rate_tmp'].", ".$products['total_tmp'].", 1)";
 
 				 
 				if($connect->query($orderItemSql) === TRUE){
@@ -55,12 +55,12 @@ $valid['success'] = array('success' => false, 'messages' => array());
 	}
 	 if($insertOrder == true && $updateStock == true && $insertOrderItem == true){
 		$valid['success'] = true;
-		$valid['messages'] = "Agregado exitosamente";	
-	 }else{
+		$valid['messages'] = "Se agrego con exito";	
+	}else{
 		$valid['success'] = false;
-		$valid['messages'] = "Ocurrio un problema, vuelva a intentarlo";	
-	 }
-	
+		$valid['messages'] = "Ocurrio un problema";
+	}
+		
 	
 	$connect->close();
 

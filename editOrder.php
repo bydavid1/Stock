@@ -133,8 +133,8 @@ include 'modal/productsOrder.php';
         <div class="form-group">
           <label for="vat" class="col-sm-3 control-label">IVA 13%</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="vat" name="vat" disabled="true" value="<?php echo $data[4] ?>"  />
-            <input type="hidden" class="form-control" id="vatValue" name="vatValue" value="<?php echo $data[4] ?>"  />
+            <input type="text" class="form-control" id="iva" name="iva" disabled="true" value="<?php echo $data[4] ?>"  />
+            <input type="hidden" class="form-control" id="ivaValue" name="ivaValue" value="<?php echo $data[4] ?>"  />
           </div>
         </div> <!--/form-group-->			  	
         <div class="form-group">

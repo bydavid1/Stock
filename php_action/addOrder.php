@@ -11,7 +11,13 @@ if (!empty($id) and !empty($cantidad))
 $productData = mysqli_query($connect, "SELECT rate FROM product WHERE product_id = '$id'");
 $data = mysqli_fetch_array($productData);
 $precio_venta = $data['rate'];
-$insert_tmp=mysqli_query($connect, "INSERT INTO tmp (product_id,quantity_tmp,rate_tmp,session_id) VALUES ('$id','$cantidad','$precio_venta','$session_id');");
+	$precio_venta_f=number_format($precio_venta,2);//Formateo variables
+	$precio_venta_r=str_replace(",","",$precio_venta_f);//Reemplazo las comas
+	$precio_total=$precio_venta_r*$cantidad;
+	$precio_total_f=number_format($precio_total,2);//Precio total formateado
+	$precio_total_r=str_replace(",","",$precio_total_f);//Reemplazo las comas
+
+$insert_tmp=mysqli_query($connect, "INSERT INTO tmp (product_id,quantity_tmp,rate_tmp,total_tmp,session_id) VALUES ('$id','$cantidad','$precio_venta_r', '$precio_total_r','$session_id');");
 
 }
 if (isset($_GET['id']))//codigo elimina un elemento del array

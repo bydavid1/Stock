@@ -68,7 +68,14 @@
           </ul>
         </li> 
 
-        <li id="navReport"><a href="report.php"> <i class="glyphicon glyphicon-check"></i> Reportes </a></li>
+        <li class="dropdown" id="navOrder">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-usd"></i> Compras <span class="caret"></span></a>
+          <ul class="dropdown-menu">            
+          <li id="managerOutlay"><a href="outlay.php"> <i class="glyphicon glyphicon-edit"></i> Gestionar compras </a></li>            
+          <li id="addOutlay"><a href="addOutlay.php"> <i class="glyphicon glyphicon-plus"></i> Agregar compras </a></li>            
+          </ul>
+        </li> 
+        
 
         <li class="dropdown" id="navSetting">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>

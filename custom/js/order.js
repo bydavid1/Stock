@@ -27,10 +27,8 @@ $(document).ready(function() {
 				
 			var orderDate = $("#orderDate").val();
 			var clientName = $("#clientName").val();
-			var clientContact = $("#clientContact").val();
-			var paid = $("#paid").val();
-			var discount = $("#discount").val();
-			var paymentType = $("#paymentType").val();
+			var iva = $("#iva").val();
+			var total = $("#grandTotal").val();
 			var paymentStatus = $("#paymentStatus").val();		
 
 			// form validation 
@@ -48,32 +46,18 @@ $(document).ready(function() {
 				$('#clientName').closest('.form-group').addClass('has-success');
 			} // /else
 
-			if(clientContact == "") {
-				$("#clientContact").after('<p class="text-danger"> Este campo es obligatorio </p>');
-				$('#clientContact').closest('.form-group').addClass('has-error');
+			if(total == "") {
+				$("#grandTotal").after('<p class="text-danger"> Este campo es obligatorio </p>');
+				$('#grandTotal').closest('.form-group').addClass('has-error');
 			} else {
-				$('#clientContact').closest('.form-group').addClass('has-success');
+				$('#grandTotal').closest('.form-group').addClass('has-success');
 			} // /else
 
-			if(paid == "") {
-				$("#paid").after('<p class="text-danger"> Este campo es obligatorio </p>');
-				$('#paid').closest('.form-group').addClass('has-error');
+			if(iva == "") {
+				$("#iva").after('<p class="text-danger"> Este campo es obligatorio </p>');
+				$('#iva').closest('.form-group').addClass('has-error');
 			} else {
-				$('#paid').closest('.form-group').addClass('has-success');
-			} // /else
-
-			if(discount == "") {
-				$("#discount").after('<p class="text-danger"> Este campo es obligatorio </p>');
-				$('#discount').closest('.form-group').addClass('has-error');
-			} else {
-				$('#discount').closest('.form-group').addClass('has-success');
-			} // /else
-
-			if(paymentType == "") {
-				$("#paymentType").after('<p class="text-danger"> Este campo es obligatorio </p>');
-				$('#paymentType').closest('.form-group').addClass('has-error');
-			} else {
-				$('#paymentType').closest('.form-group').addClass('has-success');
+				$('#iva').closest('.form-group').addClass('has-success');
 			} // /else
 
 			if(paymentStatus == "") {
@@ -126,7 +110,7 @@ $(document).ready(function() {
 	   	} // for       	
 	   	
 
-			if(orderDate && clientName && clientContact && paid && discount && paymentType && paymentStatus) {
+			if(orderDate && clientName && iva && total && paymentStatus) {
 				if(validateProduct == true && validateQuantity == true) {
 					// create order button
 					// $("#createOrderBtn").button('loading');
@@ -160,7 +144,10 @@ $(document).ready(function() {
 							$(".removeProductRowBtn").addClass('div-hide');
 								
 							} else {
-								alert(response.messages);								
+								$(".success-messages").html('<div class="alert alert-danger">'+
+								'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+								'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +	            		            		            	
+								  '</div>');								
 							}
 						} // /response
 					}); // /ajax
@@ -352,21 +339,6 @@ function getProductData(row = null) {
 			$("#quantity"+row).val("");						
 			$("#total"+row).val("");
 
-			// remove check if product name is selected
-			// var tableProductLength = $("#productTable tbody tr").length;			
-			// for(x = 0; x < tableProductLength; x++) {
-			// 	var tr = $("#productTable tbody tr")[x];
-			// 	var count = $(tr).attr('id');
-			// 	count = count.substring(3);
-
-			// 	var productValue = $("#productName"+row).val()
-
-			// 	if($("#productName"+count).val() == "") {					
-			// 		$("#productName"+count).find("#changeProduct"+productId).removeClass('div-hide');	
-			// 		console.log("#changeProduct"+count);
-			// 	}											
-			// } // /for
-
 		} else {
 			$.ajax({
 				url: 'php_action/fetchSelectedProduct.php',
@@ -386,22 +358,6 @@ function getProductData(row = null) {
 					$("#total"+row).val(total);
 					$("#totalValue"+row).val(total);
 					
-					// check if product name is selected
-					// var tableProductLength = $("#productTable tbody tr").length;					
-					// for(x = 0; x < tableProductLength; x++) {
-					// 	var tr = $("#productTable tbody tr")[x];
-					// 	var count = $(tr).attr('id');
-					// 	count = count.substring(3);
-
-					// 	var productValue = $("#productName"+row).val()
-
-					// 	if($("#productName"+count).val() != productValue) {
-					// 		// $("#productName"+count+" #changeProduct"+count).addClass('div-hide');	
-					// 		$("#productName"+count).find("#changeProduct"+productId).addClass('div-hide');								
-					// 		console.log("#changeProduct"+count);
-					// 	}											
-					// } // /for
-			
 					subAmount();
 				} // /success
 			}); // /ajax function to fetch the product data	
@@ -411,3 +367,51 @@ function getProductData(row = null) {
 		alert('no row! please refresh the page');
 	}
 } // /select on product data
+
+function getTotal(row = null) {
+	if(row) {
+		var total = Number($("#rate"+row).val()) * Number($("#quantity"+row).val());
+		total = total.toFixed(2);
+		$("#total"+row).val(total);
+		$("#totalValue"+row).val(total);
+		
+		subAmount();
+
+	} else {
+		alert('no row !! please refresh the page');
+	}
+}
+
+function subAmount() {
+	var tableProductLength = $("#productTable tbody tr").length;
+	var totalSubAmount = 0;
+	for(x = 0; x < tableProductLength; x++) {
+		var tr = $("#productTable tbody tr")[x];
+		var count = $(tr).attr('id');
+		count = count.substring(3);
+
+		totalSubAmount = Number(totalSubAmount) + Number($("#total"+count).val());
+	} // /for
+
+	totalSubAmount = totalSubAmount.toFixed(2);
+
+	// sub total
+	$("#subTotal").val(totalSubAmount);
+	$("#subTotalValue").val(totalSubAmount);
+
+	// vat
+	var iva = Number(totalSubAmount) * 0.13;
+	iva = iva.toFixed(2);
+	$("#iva").val(iva);
+	$("#ivaValue").val(iva);
+
+
+	var grandTotal = Number(totalSubAmount) + Number(iva);
+		grandTotal = grandTotal.toFixed(2);
+		$("#grandTotal").val(grandTotal);
+		$("#grandTotalValue").val(grandTotal);
+
+
+
+
+} // /sub total amount

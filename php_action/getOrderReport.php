@@ -17,11 +17,14 @@ if($_POST) {
 	$query = $connect->query($sql);
 
 	$table = '
+	<center><h4>Reporte de ventas</h4></center>
+	Fecha de inicio:'.$start_date.'<br>
+	Fecha de inicio:'.$end_date.'<br><br>
 	<table border="1" cellspacing="0" cellpadding="0" style="width:100%;">
 		<tr>
 			<th>Fecha</th>
 			<th>Cliente </th>
-			<th>Teléfono</th>
+			<th>Sub Total</th>
 			<th>Total</th>
 		</tr>
 
@@ -31,10 +34,10 @@ if($_POST) {
 			$table .= '<tr>
 				<td><center>'.$result['order_date'].'</center></td>
 				<td><center>'.$result['client_name'].'</center></td>
-				<td><center>'.$result['client_contact'].'</center></td>
-				<td><center>'.$result['grand_total'].'</center></td>
+				<td><center>'.$result['sub_total'].'</center></td>
+				<td><center>'.$result['total'].'</center></td>
 			</tr>';	
-			$totalAmount += $result['grand_total'];
+			$totalAmount += $result['total'];
 		}
 		$table .= '
 		</tr>

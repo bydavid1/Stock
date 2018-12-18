@@ -9,21 +9,20 @@ if($_POST) {
 
 	$orderDate 						= date('Y-m-d', strtotime($_POST['orderDate']));
   $clientName 					= $_POST['clientName'];
-  $clientContact 				= $_POST['clientContact'];
   $subTotalValue 				= $_POST['subTotalValue'];
-  $vatValue 						=	$_POST['vatValue'];
-  $totalAmountValue     = $_POST['totalAmountValue'];
-  $discount 						= $_POST['discount'];
+  $ivaValue 						=	$_POST['ivaValue'];
   $grandTotalValue 			= $_POST['grandTotalValue'];
-  $paid 								= $_POST['paid'];
-  $dueValue 						= $_POST['dueValue'];
-  $paymentType 					= $_POST['paymentType'];
   $paymentStatus 				= $_POST['paymentStatus'];
 
 				
-	$sql = "UPDATE orders SET order_date = '$orderDate', client_name = '$clientName', client_contact = '$clientContact', sub_total = '$subTotalValue', vat = '$vatValue', total_amount = '$totalAmountValue', discount = '$discount', grand_total = '$grandTotalValue', paid = '$paid', due = '$dueValue', payment_type = '$paymentType', payment_status = '$paymentStatus', order_status = 1 WHERE order_id = {$orderId}";	
-	$connect->query($sql);
+	$sql = "UPDATE orders SET order_date = '$orderDate', client_name = '$clientName', sub_total = '$subTotalValue', discount = '$ivaValue', total = '$grandTotalValue', paymentStatus = '$paymentStatus', order_status = 1 WHERE order_id = {$orderId}";	
+if ($connect->query($sql) === TRUE){
+	$updateOrder = true;
+}	else{
+	$updateOrder = false;
+}
 	
+
 	$readyToUpdateOrderItem = false;
 	// add the quantity from the order item to product table
 	for($x = 0; $x < count($_POST['productName']); $x++) {		
@@ -75,10 +74,14 @@ if($_POST) {
 		} // /for quantity
 	}
 
-	
-
-	$valid['success'] = true;
-	$valid['messages'] = "Successfully Updated";		
+	if ($updateOrder == true){
+		$valid['success'] = true;
+		$valid['messages'] = "Successfully Updated";	
+	}else{
+		$valid['success'] = false;
+		$valid['messages'] = "Ocurrio un problema";
+	}
+		
 	
 	$connect->close();
 

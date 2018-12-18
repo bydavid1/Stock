@@ -59,7 +59,7 @@ $(document).ready(function() {
 			} else {
 				$('#subTotal').closest('.form-group').addClass('has-success');
 			} // /else
-			if(iva == 0.00) {
+			if(iva == "") {
 				$("#iva").after('<p class="text-danger"> Parece que no hay ningun producto </p>');
 				$('#iva').closest('.form-group').addClass('has-error');
 			} else {
@@ -84,7 +84,7 @@ $(document).ready(function() {
 				type: form.attr('method'),
 				data: "orderDate="+orderDate+"&&clientName="+clientName+"&&subTotal="+subTotal+"&&iva="+iva+"&&total="+total+"&&paymentStatus="+paymentStatus,					
 				success:function(response) {
-					
+					console.log(response);
 					$(".text-danger").remove();
 					$('.form-group').removeClass('has-error').removeClass('has-success');
 
@@ -94,10 +94,6 @@ $(document).ready(function() {
 						'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
 						'<strong><i class="glyphicon glyphicon-ok"></i></strong>'+ response.messages +'</div>');
 						
-					} else if(response.success == false) {
-						$(".success-messages").html('<div class="alert alert-danger">'+
-						'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-						'<strong><i class="glyphicon glyphicon-warning-sign"></i></strong>'+ response.messages +'</div>');								
 					}else {
 						$(".success-messages").html('<div class="alert alert-info">'+
 						'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
