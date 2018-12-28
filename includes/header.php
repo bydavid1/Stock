@@ -68,7 +68,7 @@
           </ul>
         </li> 
 
-        <li class="dropdown" id="navOrder">
+        <li class="dropdown" id="navOutlay">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-usd"></i> Compras <span class="caret"></span></a>
           <ul class="dropdown-menu">            
           <li id="managerOutlay"><a href="outlay.php"> <i class="glyphicon glyphicon-edit"></i> Gestionar compras </a></li>            

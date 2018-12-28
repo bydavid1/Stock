@@ -20,16 +20,28 @@ $lowStockSql = "SELECT * FROM product WHERE quantity <= 3 AND status = 1";
 $lowStockQuery = $connect->query($lowStockSql);
 $countLowStock = $lowStockQuery->num_rows;
 
+$orderSql = "SELECT * FROM outlay ";
+$orderQuery = $connect->query($orderSql);
+$totalOutlay = 0;
+while ($data = $orderQuery->fetch_assoc()) {
+	$totalOutlay += $data['total'];
+}
+
 $connect->close();
 
 ?>
 
-
-<style type="text/css">
+	<style type="text/css">
 	.ui-datepicker-calendar {
 		display: none;
 	}
-</style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+
 
 <!-- fullCalendar 2.2.5-->
     <link rel="stylesheet" href="assests/plugins/fullcalendar/fullcalendar.min.css">
@@ -75,18 +87,25 @@ $connect->close();
 		</div> <!--/panel-->
 	</div> <!--/col-md-4-->
 
-	<div class="col-md-4">
-		<div class="card">
-		  <div class="cardHeader">
-		    <h1><?php echo date('d'); ?></h1>
-		  </div>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> Calendario</div>
+			<div class="panel-body">
+				<div id="calendar"></div>
+			</div>	
+		</div>
+	</div>
 
-		  <div class="cardContainer">
-		    <p><?php echo date('l') .' '.date('d').', '.date('Y'); ?></p>
-		  </div>
-		</div> 
-		<br/>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading"> <i class="glyphicon glyphicon-signal"></i> Reporte de ventas y gastos</div>
+			<div class="panel-body">
+			<canvas id="canvas"></canvas>
+			</div>	
+		</div>
+	</div>
 
+	<div class="col-md-6">
 		<div class="card">
 		  <div class="cardHeader" style="background-color:#245580;">
 		    <h1><?php if($totalRevenue) {
@@ -101,24 +120,33 @@ $connect->close();
 		  </div>
 		</div> 
 
+		<div class="card" style="margin-top: 10px;">
+		  <div class="cardHeader" style="background-color:#ef5350;">
+		    <h1><?php if($totalOutlay) {
+		    	echo number_format($totalOutlay,2);
+		    	} else {
+		    		echo '0';
+		    		} ?></h1>
+		  </div>
+
+		  <div class="cardContainer">
+		    <p> <i class="glyphicon glyphicon-usd"></i> Compras totales</p>
+		  </div>
+		</div> 
+
+
 	</div>
 
-	<div class="col-md-8">
-		<div class="panel panel-default">
-			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> Calendario</div>
-			<div class="panel-body">
-				<div id="calendar"></div>
-			</div>	
-		</div>
-		
-	</div>
-
+	
 	
 </div> <!--/row-->
 
 <!-- fullCalendar 2.2.5 -->
 <script src="assests/plugins/moment/moment.min.js"></script>
 <script src="assests/plugins/fullcalendar/fullcalendar.js"></script>
+<!--Charts -->
+<script src="custom/Charts/dist/Chart.bundle.js"></script>
+<script src="custom/Charts/samples/utils.js"></script>
 
 
 <script type="text/javascript">
@@ -132,8 +160,6 @@ $connect->close();
       m = date.getMonth(),
       y = date.getFullYear();
 	 
-
-
       $('#calendar').fullCalendar({
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
 		dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
@@ -148,7 +174,63 @@ $connect->close();
       });
 
 
-    });
-</script>
+		});
+		
+		//Chart JS
+		var color = Chart.helpers.color;
+		var barChartData = {
+			labels: [
+				<?php 
+				for($i=6;$i>=1;$i--){
+				?>
+
+				'<?php echo date("m")-$i;?>',
+
+				<?php 
+				}
+				?>
+			],
+			datasets: [{
+				label: 'Compras',
+				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.red,
+				borderWidth: 1,
+				data: [
+          500, 750, 500, 450, 490, 510
+				]
+			}, {
+				label: 'Ventas',
+				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+				borderColor: window.chartColors.blue,
+				borderWidth: 1,
+				data: [
+	       700, 800, 600, 410, 500, 500
+				]
+			}]
+
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myBar = new Chart(ctx, {
+				type: 'bar',
+				data: barChartData,
+				options: {
+					responsive: true,
+					legend: {
+						position: 'top',
+					},
+					title: {
+						display: true,
+						text: 'Ultimos 6 meses'
+					}
+				}
+			});
+
+		};
+
+
+	
+	</script>
 
 <?php require_once 'includes/footer.php'; ?>

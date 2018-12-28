@@ -2,7 +2,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT outlay_id, outlay_description, outlay_date FROM outlay";
+$sql = "SELECT outlay_id, outlay_description, outlay_date, quantity, total FROM outlay";
 
 $result = $connect->query($sql);
 
@@ -13,7 +13,6 @@ if($result->num_rows > 0) {
 
  while($row = $result->fetch_array()) {
 
-    $total = 10.00;
 
  	$button = '<!-- Single button -->
 	<div class="btn-group">
@@ -28,14 +27,17 @@ if($result->num_rows > 0) {
 
 
  	$output['data'][] = array( 		
- 		// image
+		 // id
+		$row[0],
+
  		$row[1],
  		// product name
  		$row[2], 
  		// rate
- 		$row[0],
-         // button
-        $total,
+		$row[3],
+		 
+		$row[4],
+    // button
  		$button 		
  		); 	
  } // /while 

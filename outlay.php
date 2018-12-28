@@ -25,10 +25,11 @@
 				<table class="table" id="manageOutlayTable">
 					<thead>
 						<tr>							
-							<th>Proveedor</th>
+							<th>#</th>
 							<th>Descripcion</th>
-                            <th>Cantidad</th>
-                            <th>Total</th>
+                            <th>Fecha</th>
+							<th>Cantidad</th>
+							<th>Total</th>
 							<th style="width:15%;">Opciones</th>
 						</tr>
 					</thead>

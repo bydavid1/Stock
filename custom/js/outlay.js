@@ -1,6 +1,14 @@
 $(document).ready(function() {
 
 	var divRequest = $(".div-request").text();
+
+		// top nav bar 
+		$("#navOutlay").addClass('active');
+		// add order	
+		// top nav child bar 
+		$('#addOutlay').addClass('active');	
+
+	$("#outlayDate").datepicker();
 	
 	$("#manageOutlayTable").DataTable({
 		'ajax': 'php_action/fetchOutlay.php',
@@ -13,22 +21,41 @@ $(document).ready(function() {
 
         $('.form-group').removeClass('has-error').removeClass('has-success');
 			$('.text-danger').remove();
+
 				
+			var description = $("#description").val();
+			var outlayDate = $("#outlayDate").val();
+			var grandQuantity = $("#grandQuantity").val();
+			var grandTotal = $("#grandTotal").val();
 			
 
 			// form validation 
-			if($("#description").val() == "") {
+			if(description == "") {
 				$("#description").after('<p class="text-danger"> Este campo es obligatorio </p>');
 				$('#description').closest('.form-group').addClass('has-error');
 			} else {
 				$('#description').closest('.form-group').addClass('has-success');
 			} // /else
 
-			if($("#outlayDate").val() == "") {
+			if(outlayDate == "") {
 				$("#outlayDate").after('<p class="text-danger"> Este campo es obligatorio </p>');
 				$('#outlayDate').closest('.form-group').addClass('has-error');
 			} else {
 				$('#outlayDate').closest('.form-group').addClass('has-success');
+			} // /else
+
+			if(grandQuantity == "") {
+				$("#grandQuantity").after('<p class="text-danger"> Este campo es obligatorio </p>');
+				$('#grandQuantity').closest('.form-group').addClass('has-error');
+			} else {
+				$('#grandQuantity').closest('.form-group').addClass('has-success');
+			} // /else
+
+			if(grandTotal == "") {
+				$("#grandTotal").after('<p class="text-danger"> Este campo es obligatorio </p>');
+				$('#grandTotal').closest('.form-group').addClass('has-error');
+			} else {
+				$('#grandTotal').closest('.form-group').addClass('has-success');
 			} // /else
 
 			// array validation
@@ -137,7 +164,7 @@ $(document).ready(function() {
 	      }          
 		   } // for
 		   
-		   if(description && outlayDate) {
+		  if(description && outlayDate && grandQuantity && grandTotal){ 
 			if(validateProduct == true && validateQuantity == true && validateBrand == true && validateRate == true && validateTotal == true) {
 
 				$.ajax({
@@ -150,7 +177,7 @@ $(document).ready(function() {
 					},
 					success:function(response) {
 						// reset button
-						$("#editOrderBtn").button('reset');
+						$("#createOutlay").button('reset');
 						
 						$(".text-danger").remove();
 						$('.form-group').removeClass('has-error').removeClass('has-success');
@@ -163,20 +190,17 @@ $(document).ready(function() {
 				'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +	            		            		            	
 				  '</div>');
 							
-						$("html, body, div.panel, div.pane-body").animate({scrollTop: '0px'}, 100);
-
-							
 						} else {
 							$(".success-messages").html('<div class="alert alert-danger">'+
 							'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-							'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response +	            		            		            	
+							'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +	            		            		            	
 							  '</div>');								
 						}
 					} // /response
 				}); // /ajax
 			} // if array validate is true
-		} // /if field validate is true
-
+		}// /if field validate is true
+		
 		return false;
 
     });
@@ -214,11 +238,11 @@ function addRow() {
 			var tr = '<tr id="row'+count+'" class="'+arrayNumber+'">'+			  				
 				'<td>'+
 					'<div class="form-group col-sm-12">'+
-                    '<select class="form-control" name="brandName[]" id="brandName<?php echo $x; ?>" onchange="getProductData('+count+')" >'+
+                    '<select class="form-control" name="brandName[]" id="brandName'+count+'" onchange="getProductData('+count+')" >'+
                         '<option value="">-- Selecciona --</option>';
 						console.log(response);
 						$.each(response, function(index, value) {
-							tr += '<option value="'+value[0]+'">'+value[1]+'</option>';							
+							tr += '<option value="'+value[1]+'">'+value[1]+'</option>';							
 						});
 													
 					tr += '</select>'+
@@ -226,23 +250,29 @@ function addRow() {
                 '</td>'+
                 '<td>'+
                 '<div class="form-group col-sm-12">'+
-                    '<select class="form-control" name="productName[]" id="productName'+count+'" >'+
+                    '<select class="form-control" name="productName[]" id="productName'+count+'" onchange="enable('+count+')" >'+
                         '<option value="">-- Selecciona --</option>'+
                     '</select>'+
                     '</div>'+
                 '</td>'+
 				'<td>'+
+				' <div class="form-group col-sm-12">'+
 					'<input type="number" name="rate[]" id="rate'+count+'" autocomplete="off"  class="form-control" step="0.01" value="0" min="0" onkeyup="totalValue('+count+')" disabled/>'+
 					'<input type="hidden" name="rateValue[]" id="rateValue'+count+'" autocomplete="off" class="form-control" />'+
-				'</td>'+
+				'</div>'+
+					'</td>'+
 				'<td>'+
-					'<input type="number" name="quantity[]" id="quantity'+count+'" onkeyup="getTotal('+count+')" autocomplete="off" disabled class="form-control" value="1"  min="1" onkeyup="totalValue('+count+')" />'+
+				'<div class="form-group col-sm-12">'+
+					'<input type="number" name="quantity[]" id="quantity'+count+'" onkeyup="totalValue('+count+')" autocomplete="off" disabled class="form-control" value="1"  min="1" onkeyup="totalValue('+count+')" />'+
                     '<input type="hidden" name="quantityValue[]" id="quantityValue'+count+'" autocomplete="off" class="form-control" />'+
-				'</td>'+
+				'</div>'+
+					'</td>'+
 				'<td>'+
-					'<input type="number" name="total[]" id="total'+count+'" autocomplete="off" class="form-control" step="0.01" value="0" min="0" disabled="true" />'+
+				' <div class="form-group col-sm-12">'+
+					'<input type="text" name="total[]" id="total'+count+'" autocomplete="off" class="form-control" step="0.01" value="0" min="0" disabled="true" />'+
 					'<input type="hidden" name="totalValue[]" id="totalValue'+count+'" autocomplete="off" class="form-control" />'+
-				'</td>'+
+				'</div>'+
+					'</td>'+
 				'<td>'+
 					'<button class="btn btn-default removeProductRowBtn" type="button" onclick="removeProductRow('+count+')"><i class="glyphicon glyphicon-trash"></i></button>'+
 				'</td>'+
@@ -270,9 +300,9 @@ function removeProductRow(row = null) {
 
 function getProductData(row = null) {
 	if(row) {
-		var brandId = $("#brandName"+row).val();		
-		console.log(brandId);
-		if(brandId == "") {
+		var brandName = $("#brandName"+row).val();		
+		console.log(brandName);
+		if(brandName == "") {
 			$("#rate"+row).val("");
 			$("#quantity"+row).val("");						
 			$("#total"+row).val("");
@@ -283,7 +313,7 @@ function getProductData(row = null) {
 			$.ajax({
 				url: 'php_action/fetchSelectedDataBrand.php',
 				type: 'post',
-				data: "brandId="+brandId,
+				data: "brandName="+brandName,
 				success:function(response) {
                     console.log(response);
 					
@@ -322,6 +352,8 @@ function totalValue(row = null) {
 
  $("#total"+row).val(total);
  $("#totalValue"+row).val(total);
+
+ subAmount();
 }
 
 function removeOutlay(outlay_id = null) {
@@ -379,3 +411,29 @@ function removeOutlay(outlay_id = null) {
 		}); // /remove product btn clicked
 	} // /if productid
 } // /remove product function
+
+
+function subAmount() {
+	var tableProductLength = $("#outlayTable tbody tr").length;
+	var total = 0;
+	var quantity = 0;
+	for(x = 0; x < tableProductLength; x++) {
+		var tr = $("#outlayTable tbody tr")[x];
+		var count = $(tr).attr('id');
+		count = count.substring(3);
+
+		total = Number(total) + Number($("#total"+count).val());
+		quantity = Number(quantity) + Number($("#quantity"+count).val());
+	} // /for
+
+
+	total = total.toFixed(2);
+	$("#grandTotal").val(total);
+	$("#grandTotalValue").val(total);
+
+
+	$("#grandQuantity").val(quantity);
+	$("#grandQuantityValue").val(quantity);
+
+
+} // /sub total amount

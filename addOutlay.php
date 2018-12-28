@@ -1,6 +1,6 @@
 <?php require_once 'includes/header.php'; ?>
 <?php require_once 'php_action/db_connect.php'; ?> 
-<?php require_once 'modal/outlayModal.php'; ?> 
+
 
 <div class='div-request div-hide'>add</div>
 
@@ -23,19 +23,18 @@
 
       <form class="form-horizontal" method="POST" action="php_action/createOutlay.php" id="createOutlayForm">
 
-		   	<div class="form-group">
-	        	<label for="description" class="col-sm-2 control-label">Descripcion:</label>
-				    <div class="col-sm-6">
-				      <input type="text" class="form-control" id="description" placeholder="Descripcion" name="description" autocomplete="off">
-				    </div>
-	        </div> <!-- /form-group-->		
-
-            <div class="form-group">
-	        	<label for="outlayDate" class="col-sm-2 control-label">Fecha:</label>
-				    <div class="col-sm-4">
-				      <input type="text" class="form-control" id="outlayDate" value="<?php echo date("m/d/Y");?>" name="outlayDate" autocomplete="off">
-				    </div>
-	        </div> <!-- /form-group-->
+      <div class="form-group">
+      <label for="outlayDate" class="col-sm-2 control-label">Fecha de orden</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="outlayDate" name="outlayDate" autocomplete="off" value="<?php echo date("m/d/Y");?>"/>
+      </div>
+    </div> <!--/form-group-->
+    <div class="form-group">
+      <label for="description" class="col-sm-2 control-label">Descripcion</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="description" name="description" placeholder="Descripcion" autocomplete="off"  />
+      </div>
+    </div> <!--/form-group-->
 
 
 					<table class="table" id="outlayTable">
@@ -63,7 +62,7 @@
 														  $sql = 'SELECT * FROM brands WHERE brand_status = 1';
 															$query = $connect->query($sql);
 															while($data = $query->fetch_array()){
-																echo "<option value='".$data['brand_id']."'> ".$data['brand_name']."</option>";
+																echo "<option value='".$data['brand_name']."'> ".$data['brand_name']."</option>";
 															}
                             ?>    
                         </select>
@@ -90,7 +89,7 @@
                     </td>		  					
                     <td>
                     <div class="form-group col-sm-12">			  					
-                        <input type="number" name="total[]" id="total<?php echo $x; ?>" autocomplete="off" class="form-control" step='0.01' value='0' min='0' disabled="true"/>			  					
+                        <input type="text" name="total[]" id="total<?php echo $x; ?>" autocomplete="off" class="form-control" step='0.01' value='0' min='0' disabled="true"/>			  					
                         <input type="hidden" name="totalValue[]" id="totalValue<?php echo $x; ?>" autocomplete="off" class="form-control"/>			  					
                     </div>
                     </td>
@@ -105,6 +104,25 @@
             ?>
         </tbody>			  	
     </table>
+
+    <div class="col-md-6">
+        </div>
+    <div class="col-md-6">	
+    <div class="form-group">
+          <label for="vat" class="col-sm-3 control-label">Cantidad total</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="grandQuantity" name="grandQuantity" disabled="true"/>
+            <input type="hidden" class="form-control" id="grandQuantityValue" name="grandQuantityValue"/>
+          </div>
+        </div> <!--/form-group-->			  	
+        <div class="form-group">
+          <label for="grandTotal" class="col-sm-3 control-label">Total</label>
+          <div class="col-sm-5">
+            <input type="text" class="form-control" id="grandTotal" name="grandTotal" disabled="true"/>
+            <input type="hidden" class="form-control" id="grandTotalValue" name="grandTotalValue"/>
+          </div>
+        </div> <!--/form-group-->	
+        </div>
 
             <div class="form-group submitButtonFooter">
 			    <div class="col-sm-offset-2 col-sm-10">
