@@ -80,26 +80,6 @@ $(document).ready(function() {
            } // for  
            
 
-           	// array validation
-			var brandName = document.getElementsByName('brandName[]');				
-			var validateBrand;
-			for (var x = 0; x < brandName.length; x++) {       			
-				var brandNameId = brandName[x].id;	    	
-		    if(brandName[x].value == ''){	    		    	
-		    	$("#"+brandNameId+"").after('<p class="text-danger"> Este campo es obligatorio </p>');
-		    	$("#"+brandNameId+"").closest('.form-group').addClass('has-error');	    		    	    	
-	      } else {      	
-		    	$("#"+brandNameId+"").closest('.form-group').addClass('has-success');	    		    		    	
-	      }          
-	   	} // for
-
-	   	for (var x = 0; x < brandName.length; x++) {       						
-		    if(brandName[x].value){	    		    		    	
-		    	validateBrand = true;
-	      } else {      	
-		    	validateBrand = false;
-	      }          
-           } // for  
            
     	// array validation
 			var rateValue = document.getElementsByName('rate[]');				
@@ -236,28 +216,21 @@ function addRow() {
 			$("#addRowBtn").button("reset");			
 
 			var tr = '<tr id="row'+count+'" class="'+arrayNumber+'">'+			  				
-				'<td>'+
-					'<div class="form-group col-sm-12">'+
-                    '<select class="form-control" name="brandName[]" id="brandName'+count+'" onchange="getProductData('+count+')" >'+
-                        '<option value="">-- Selecciona --</option>';
-						console.log(response);
-						$.each(response, function(index, value) {
-							tr += '<option value="'+value[1]+'">'+value[1]+'</option>';							
-						});
-													
-					tr += '</select>'+
-					'</div>'+
-                '</td>'+
-                '<td>'+
-                '<div class="form-group col-sm-12">'+
-                    '<select class="form-control" name="productName[]" id="productName'+count+'" onchange="enable('+count+')" >'+
-                        '<option value="">-- Selecciona --</option>'+
-                    '</select>'+
-                    '</div>'+
-                '</td>'+
+			'<td>'+
+			'<div class="form-group col-sm-12">'+
+			'<input type="text" name="productCode[]" id="productCode'+count+'" autocomplete="off" class="form-control" onchange="getProductData('+count+')"/>'+		  					
+			'<input type="hidden" name="productCodeValue[]" id="ProductCodeValue'+count+'" autocomplete="off" class="form-control"/>'+
+			'</div>'+
+			'</td>'+
+			'<td>'+
+			'<div class="form-group col-sm-12">'+
+			'<input type="text" name="productName[]" id="productName'+count+'" autocomplete="off" class="form-control" disabled />'+			  					
+			'<input type="hidden" name="productNameValue[]" id="productNameValue<'+count+'" autocomplete="off" class="form-control"/>'+	
+			'</div>'+
+			'</td>'+
 				'<td>'+
 				' <div class="form-group col-sm-12">'+
-					'<input type="number" name="rate[]" id="rate'+count+'" autocomplete="off"  class="form-control" step="0.01" value="0" min="0" onkeyup="totalValue('+count+')" disabled/>'+
+					'<input type="number" name="rate[]" id="rate'+count+'" autocomplete="off"  class="form-control" step="0.01"  min="0" onkeyup="totalValue('+count+')" disabled/>'+
 					'<input type="hidden" name="rateValue[]" id="rateValue'+count+'" autocomplete="off" class="form-control" />'+
 				'</div>'+
 					'</td>'+
@@ -269,7 +242,7 @@ function addRow() {
 					'</td>'+
 				'<td>'+
 				' <div class="form-group col-sm-12">'+
-					'<input type="text" name="total[]" id="total'+count+'" autocomplete="off" class="form-control" step="0.01" value="0" min="0" disabled="true" />'+
+					'<input type="text" name="total[]" id="total'+count+'" autocomplete="off" class="form-control" step="0.01"  min="0" disabled="true" />'+
 					'<input type="hidden" name="totalValue[]" id="totalValue'+count+'" autocomplete="off" class="form-control" />'+
 				'</div>'+
 					'</td>'+
@@ -300,9 +273,9 @@ function removeProductRow(row = null) {
 
 function getProductData(row = null) {
 	if(row) {
-		var brandName = $("#brandName"+row).val();		
-		console.log(brandName);
-		if(brandName == "") {
+		var code = $("#productCode"+row).val();		
+		console.log(code);
+		if(code == "") {
 			$("#rate"+row).val("");
 			$("#quantity"+row).val("");						
 			$("#total"+row).val("");
@@ -311,14 +284,23 @@ function getProductData(row = null) {
             $("#quantity"+row).prop('disabled', true);
 		} else {
 			$.ajax({
-				url: 'php_action/fetchSelectedDataBrand.php',
+				url: 'php_action/fetchSelectedDataProduct.php',
 				type: 'post',
-				data: "brandName="+brandName,
+				data: "code="+code,
+				dataType: 'json',
 				success:function(response) {
                     console.log(response);
-					
-                    $("#productName"+row).append(response);
-                    $("#productName"+row).prop('disabled', false);
+					if(response.success == true){
+						$("#productName"+row).val(response.messages);
+						$("#quantity"+row).prop('disabled', false);
+						$("#rate"+row).prop('disabled', false);
+					}else{
+						$("#productName"+row).val(response.messages);
+						$("#productName"+row).prop('disabled', true);
+						$("#rate"+row).prop('disabled', true);
+						$("#quantity"+row).prop('disabled', true);
+					}
+
 					
 				} // /success
 			}); // /ajax function to fetch the product data	
@@ -329,19 +311,6 @@ function getProductData(row = null) {
 	}
 } // /select on product data
 
-function enable(row = null) {
-
-    var productName = $('#productName'+row).val();
-	if(!productName == "") {
-        
-        $("#quantity"+row).prop('disabled', false);
-        $("#rate"+row).prop('disabled', false);
-
-	} else {
-        $("#quantity"+row).prop('disabled', true);
-        $("#rate"+row).prop('disabled', true);
-	}
-}
 
 function totalValue(row = null) {
  var rate = Number($("#rate"+row).val());

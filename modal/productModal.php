@@ -24,6 +24,14 @@
 					    </div>
 				      
 				    </div>
+	        </div> <!-- /form-group-->
+
+					<div class="form-group">
+	        	<label for="codProduct" class="col-sm-3 control-label">Codigo: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="codProduct" placeholder="Codigo del producto" name="codProduct" autocomplete="off">
+				    </div>
 	        </div> <!-- /form-group-->	     	           	       
 
 	        <div class="form-group">

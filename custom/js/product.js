@@ -41,12 +41,21 @@ $(document).ready(function() {
 
 			// form validation
 			var productImage = $("#productImage").val();
+			var codProduct = $("#codProduct").val();
 			var productName = $("#productName").val();
 			var quantity = $("#quantity").val();
 			var rate = $("#rate").val();
 			var brandName = $("#brandName").val();
 			var categoryName = $("#categoryName").val();
 			var productStatus = $("#productStatus").val();
+
+			// form validation 
+			if(codProduct == "") {
+				$("#codProduct").after('<p class="text-danger"> Este campo es obligatorio </p>');
+				$('#codProduct').closest('.form-group').addClass('has-error');
+			} else {
+				$('#codProduct').closest('.form-group').addClass('has-success');
+			} // /else
 	
 			if(productImage == "") {
 				$("#productImage").closest('.center-block').after('<p class="text-danger">Este campo es obligatorio</p>');
@@ -118,7 +127,7 @@ $(document).ready(function() {
 				$("#productStatus").closest('.form-group').addClass('has-success');	  	
 			}	// /else
 
-			if(productImage && productName && quantity && rate && brandName && categoryName && productStatus) {
+			if(codProduct && productImage && productName && quantity && rate && brandName && categoryName && productStatus) {
 				// submit loading button
 				$("#createProductBtn").button('loading');
 

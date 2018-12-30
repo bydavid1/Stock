@@ -18,7 +18,10 @@ if($result->num_rows > 0) {
  while($row = $result->fetch_array()) {
  	$productId = $row[0];
 
-	 $quantity = "<input type='text' class='form-control'  id='cantidad_".$productId."'  value='1' >";
+	 $quantity = "
+	 <div class='col-sm-5'>
+	 <input type='text' class='form-control'  id='cantidad_".$productId."'  value='1' >
+	 </div>";
 	 $button = "<a class='btn btn-info' href='#' onclick='agregar(".$productId.")'><i class='glyphicon glyphicon-shopping-cart'></i></a>";
 
 	$brand = $row[3];

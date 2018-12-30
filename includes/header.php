@@ -54,7 +54,7 @@
 
       	<li id="navDashboard"><a href="index.php"><i class="glyphicon glyphicon-list-alt"></i>  Inicio</a></li>        
         
-        <li id="navBrand"><a href="brand.php"><i class="glyphicon glyphicon-wrench"></i>  Fabricantes</a></li>        
+        <li id="navBrand"><a href="brand.php"><i class="glyphicon glyphicon-wrench"></i>  Proveedores</a></li>        
 
         <li id="navCategories"><a href="categories.php"> <i class="glyphicon glyphicon-th-list"></i> Categorías</a></li>        
 
