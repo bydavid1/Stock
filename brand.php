@@ -6,25 +6,29 @@
 
 		<ol class="breadcrumb">
 		  <li><a href="dashboard.php">Inicio</a></li>		  
-		  <li class="active">Fabricantes</li>
+		  <li class="active">Proveedores</li>
 		</ol>
 
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Listado de fabricantes</div>
+				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Listado de proveedores</div>
 			</div> <!-- /panel-heading -->
 			<div class="panel-body">
 
 				<div class="remove-messages"></div>
 
 				<div class="div-action pull pull-right" style="padding-bottom:20px;">
-					<button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i> Agregar fabricante </button>
+					<button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i> Agregar proveedor </button>
 				</div> <!-- /div-action -->				
 				
 				<table class="table" id="manageBrandTable">
 					<thead>
-						<tr>							
+						<tr>		
+						    <th>Codigo</th>					
 							<th>Nombre</th>
+							<th>Telefono</th>
+							<th>NIT</th>
+							<th>Direccion</th>
 							<th>Estado</th>
 							<th style="width:15%;">Opciones</th>
 						</tr>

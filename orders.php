@@ -6,7 +6,7 @@ require_once 'includes/header.php';
 ?>
 
 
-<div class="panel panel-default">
+<div class="panel panel-primary">
 	<div class="panel-heading">
 
 		<?php 

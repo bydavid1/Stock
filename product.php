@@ -10,9 +10,9 @@
 		  <li class="active">Productos</li>
 		</ol>
 
-		<div class="panel panel-default">
+		<div class="panel panel-danger">
 			<div class="panel-heading">
-				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Listado de productos</div>
+				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Listado productos y servicios</div>
 			</div> <!-- /panel-heading -->
 			<div class="panel-body">
 

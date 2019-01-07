@@ -26,9 +26,10 @@
 					<thead>
 						<tr>							
 							<th>#</th>
-							<th>Descripcion</th>
-                            <th>Fecha</th>
+							<th>Fecha</th>
+                            <th>Proveedor</th>
 							<th>Cantidad</th>
+							<th>Estado</th>
 							<th>Total</th>
 							<th style="width:15%;">Opciones</th>
 						</tr>
@@ -40,6 +41,29 @@
 		</div> <!-- /panel -->		
 	</div> <!-- /col-md-12 -->
 </div> <!-- /row -->
+
+	 <!-- remove order -->
+	 <div class="modal fade" tabindex="-1" role="dialog" id="removeOutModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><i class="glyphicon glyphicon-trash"></i> Eliminar compra</h4>
+      </div>
+      <div class="modal-body">
+
+      	<div class="removeOutMessages"></div>
+
+        <p>Realmente deseas eliminar este registro?</p>
+      </div>
+      <div class="modal-footer removeProductFooter">
+        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Cerrar</button>
+        <button type="button" class="btn btn-primary" id="removeOutBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Eliminar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- /remove order-->
 <script src="custom/js/outlay.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>

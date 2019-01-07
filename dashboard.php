@@ -19,8 +19,8 @@ while ($orderResult = $orderQuery->fetch_assoc()) {
 $lowStockSql = "SELECT * FROM product WHERE quantity <= 3 AND status = 1";
 $lowStockQuery = $connect->query($lowStockSql);
 $countLowStock = $lowStockQuery->num_rows;
-
-$orderSql = "SELECT * FROM outlay ";
+ 
+$orderSql = "SELECT * FROM outlay WHERE available = 1";
 $orderQuery = $connect->query($orderSql);
 $totalOutlay = 0;
 while ($data = $orderQuery->fetch_assoc()) {

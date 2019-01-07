@@ -1,6 +1,7 @@
-<?php require_once 'includes/header.php'; ?>
-<?php require_once 'php_action/db_connect.php'; ?> 
-
+<?php require_once 'includes/header.php'; 
+ require_once 'php_action/db_connect.php'; 
+include 'modal/productsOrder.php';  
+include 'modal/providerModal.php'; ?> 
 
 <div class='div-request div-hide'>add</div>
 
@@ -30,22 +31,23 @@
            <input type="text" class="form-control" id="outlayDate" name="outlayDate" autocomplete="off" value="<?php echo date("m/d/Y");?>"/>
         </div>
     </div> <!--/form-group-->
+    <div class="form-group col-sm-12">
+       <label for="clientName" class="col-sm-3 control-label">Comprado a:</label>
+        <div class="col-sm-7">
+	     <input type="text" class="form-control" id="provider" name="provider" placeholder="Comprado a" autocomplete="off" onchange="success()"/>
+       </div>
+       <div class="col-sm-2">
+         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#searchProvider"> <i class="glyphicon glyphicon-search"></i> </button>
+       </div>
+    </div><!--/form-group-->
     <div class="form-group">
       <label for="description" class="col-sm-3 control-label">NIT</label>
       <div class="col-sm-8">
         <input type="text" class="form-control" id="nit" name="nit" placeholder="NIT" autocomplete="off"  />
       </div>
     </div> <!--/form-group-->
-   <div class="form-group col-sm-12">
-       <label for="clientName" class="col-sm-3 control-label">Comprado a:</label>
-        <div class="col-sm-7">
-	     <input type="text" class="form-control" id="provider" name="provider" placeholder="Comprado a" autocomplete="off" />
-       </div>
-       <div class="col-sm-2">
-         <button type="button" class="btn btn-default"  id="searchProvider" data-loading-text="cargando..."> <i class="glyphicon glyphicon-search"></i> </button>
-       </div>
-    </div><!--/form-group-->
    </div> 
+
    <div class="col-sm-6">
    <div class="form-group">
       <label for="description" class="col-sm-2 control-label">Descripcion</label>
@@ -54,7 +56,26 @@
         </textarea>
       </div>
     </div> <!--/form-group-->
-   </div>
+    <div class="form-group">
+    <label class='col-sm-2 control-label'>Pago</label>
+    <div class="col-sm-8">
+	<select class="form-control text-right" name="paymentType" id="paymentType">
+				      	<option value="1" >Efectivo</option>
+				      	<option value="2" >Credito</option>
+	</select>
+    </div>
+       </div>
+       <div class="form-group">
+    <label class='col-sm-2 control-label'>Estado</label>
+    <div class="col-sm-8">
+	<select class="form-control text-right" name="paymentStatus" id="paymentStatus">
+				      	<option value="1" >Pago completo</option>
+				      	<option value="2" >Pago por adelantado</option>
+				      	<option value="3" >No pagado</option>
+	</select>
+    </div>
+       </div>
+       </div>
 
 	<table class="table" id="outlayTable">
         <thead>
@@ -141,17 +162,22 @@
         </div> <!--/form-group-->	
         </div>
 
+        <input type="hidden" name="trCount" id="trCount" autocomplete="off" class="form-control"/>	
+
             <div class="form-group submitButtonFooter">
 			    <div class="col-sm-offset-2 col-sm-10">
 				<button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="cargando..."> <i class="glyphicon glyphicon-plus-sign"></i> Añadir fila </button>
 
 	            <button type="submit" class="btn btn-primary" id="createOutlay" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Guardar cambios</button>
+          
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addProductsModal"><span class="glyphicon glyphicon-search"></span> Ver productos</button>
+
           </div>
 			  </div>
 
 	       
      	</form> <!-- /.form -->	     
 
-			 <script src="custom/js/outlay.js"></script>
+			 <script src="custom/js/addOutlay.js"></script>
 
        <?php require_once 'includes/footer.php'; ?>

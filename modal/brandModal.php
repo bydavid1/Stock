@@ -5,25 +5,52 @@
     	<form class="form-horizontal" id="submitBrandForm" action="php_action/createBrand.php" method="POST">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title"><i class="fa fa-plus"></i> Agregar fabricante</h4>
+	        <h4 class="modal-title"><i class="fa fa-plus"></i> Agregar proveedor</h4>
 	      </div>
 	      <div class="modal-body">
 
 	      	<div id="add-brand-messages"></div>
 
 	        <div class="form-group">
+	        	<label for="brandName" class="col-sm-3 control-label">Codigo: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="brandCode" placeholder="Codigo del proveedor" name="brandCode" autocomplete="off">
+				    </div>
+	        </div> <!-- /form-group-->
+					<div class="form-group">
 	        	<label for="brandName" class="col-sm-3 control-label">Nombre: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="brandName" placeholder="Nombre del fabricante" name="brandName" autocomplete="off">
+				      <input type="text" class="form-control" id="brandName" placeholder="Nombre del proveedor" name="brandName" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->	         	        
+	        </div> <!-- /form-group-->	  
+					<div class="form-group">
+	        	<label for="brandName" class="col-sm-3 control-label">Telefono: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="phone" placeholder="Telefono del proveedor" name="phone" autocomplete="off">
+				    </div>
+	        </div> <!-- /form-group-->	
+					<div class="form-group">
+	        	<label for="brandName" class="col-sm-3 control-label">NIT: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <input type="text" class="form-control" id="nit" placeholder="NIT del proveedor" name="nit" autocomplete="off">
+				    </div>
+	        </div> <!-- /form-group-->	
+					<div class="form-group">
+	        	<label for="brandName" class="col-sm-3 control-label">Direccion: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <textarea class="form-control" id="address" placeholder="Direccion del proveedor" name="address"></textarea>
+				    </div>
+	        </div> <!-- /form-group-->	       	        
 	        <div class="form-group">
 	        	<label for="brandStatus" class="col-sm-3 control-label">Estado: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <select class="form-control" id="brandStatus" name="brandStatus">
-				      	<option value="">-- Seleciona--</option>
 				      	<option value="1">Disponible</option>
 				      	<option value="2">No disponible</option>
 				      </select>

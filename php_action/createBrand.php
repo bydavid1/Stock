@@ -8,8 +8,12 @@ if($_POST) {
 
 	$brandName = $_POST['brandName'];
   $brandStatus = $_POST['brandStatus']; 
+  $brandCode = $_POST['brandCode']; 
+  $nit = $_POST['nit']; 
+  $phone = $_POST['phone']; 
+  $address = $_POST['address']; 
 
-	$sql = "INSERT INTO brands (brand_name, brand_active, brand_status) VALUES ('$brandName', '$brandStatus', 1)";
+	$sql = "INSERT INTO brands (cod_brand, brand_name, nit, phone, address, brand_active, brand_status) VALUES ('$brandCode','$brandName','$nit', '$phone', '$address', '$brandStatus', 1)";
 
 	if($connect->query($sql) === TRUE) {
 	 	$valid['success'] = true;

@@ -2,7 +2,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1";
+$sql = "SELECT brand_id, cod_brand, brand_name, phone, nit, address, brand_active, brand_status FROM brands WHERE brand_status = 1";
 $result = $connect->query($sql);
 
 $output = array('data' => array());
@@ -15,7 +15,7 @@ if($result->num_rows > 0) {
  while($row = $result->fetch_array()) {
  	$brandId = $row[0];
  	// active 
- 	if($row[2] == 1) {
+ 	if($row[6] == 1) {
  		// activate member
  		$activeBrands = "<label class='label label-success'>Disponible</label>";
  	} else {
@@ -35,7 +35,11 @@ if($result->num_rows > 0) {
 	</div>';
 
  	$output['data'][] = array( 		
- 		$row[1], 		
+		 $row[1], 		
+		 $row[2],
+		 $row[3],
+		 $row[4],
+		 $row[5],
  		$activeBrands,
  		$button
  		); 	

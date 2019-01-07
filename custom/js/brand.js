@@ -21,6 +21,10 @@ $(document).ready(function() {
 
 		var brandName = $("#brandName").val();
 		var brandStatus = $("#brandStatus").val();
+		var brandCode = $("#brandCode").val();
+		var nit = $("#nit").val();
+		var address = $("#address").val();
+		var phone = $("#phone").val();
 
 		if(brandName == "") {
 			$("#brandName").after('<p class="text-danger">Este campo es obligatorio</p>');
@@ -42,8 +46,45 @@ $(document).ready(function() {
 			// success out for form 
 			$("#brandStatus").closest('.form-group').addClass('has-success');	  	
 		}
+		if(brandCode == "") {
+			$("#brandCode").after('<p class="text-danger">Este campo es obligatorio</p>');
+			$('#brandCode').closest('.form-group').addClass('has-error');
+		} else {
+			// remov error text field
+			$("#brandCode").find('.text-danger').remove();
+			// success out for form 
+			$("#brandCode").closest('.form-group').addClass('has-success');	  	
+		}
+		if(nit == "") {
+			$("#nit").after('<p class="text-danger">Este campo es obligatorio</p>');
+			$('#nit').closest('.form-group').addClass('has-error');
+		} else {
+			// remov error text field
+			$("#nit").find('.text-danger').remove();
+			// success out for form 
+			$("#nit").closest('.form-group').addClass('has-success');	  	
+		}
+		if(phone == "") {
+			$("#phone").after('<p class="text-danger">Este campo es obligatorio</p>');
+			$('#phone').closest('.form-group').addClass('has-error');
+		} else {
+			// remov error text field
+			$("#phone").find('.text-danger').remove();
+			// success out for form 
+			$("#phone").closest('.form-group').addClass('has-success');	  	
+		}
 
-		if(brandName && brandStatus) {
+		if(address == "") {
+			$("#address").after('<p class="text-danger">Este campo es obligatorio</p>');
+			$('#address').closest('.form-group').addClass('has-error');
+		} else {
+			// remov error text field
+			$("#address").find('.text-danger').remove();
+			// success out for form 
+			$("#address").closest('.form-group').addClass('has-success');	  	
+		}
+
+		if(brandName && brandStatus && brandCode && phone && nit && address) {
 			var form = $(this);
 			// button loading
 			$("#createBrandBtn").button('loading');

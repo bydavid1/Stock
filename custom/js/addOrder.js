@@ -2,6 +2,8 @@ var addProductsOrder;
 
 $(document).ready(function() {
 
+	load(1);
+
 	var divRequest = $(".div-request").text();
 
 	// top nav bar 
@@ -105,14 +107,25 @@ $(document).ready(function() {
 		}
         return false;
 		}); 
-
-		//Modal
-	   addProductsOrder = $('#addProductsOrder').DataTable({
-		'ajax': 'php_action/fetchAddProduct.php',
-		'order': []
-	});
 	  
 });
+
+	//Modal
+function load(page){
+			var q= $("#q").val();
+			$("#loader").fadeIn('slow');
+			$.ajax({
+				url:'./php_action/fetchAddProduct.php?action=ajax&page='+page+'&q='+q,
+				 beforeSend: function(objeto){
+				 $('#loader').html('<img src="./img/ajax-loader.gif"> Cargando...');
+			  },
+				success:function(data){
+					$(".outer_div").html(data).fadeIn('slow');
+					$('#loader').html('');
+					
+				}
+			})
+		}
 
 function agregar(id){
 	var cantidad = document.getElementById('cantidad_'+id).value;

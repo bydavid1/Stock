@@ -51,7 +51,10 @@ $valid['success'] = array('success' => false, 'messages' => array());
 					$insertOrderItem = true;
 				}else{
 					$insertOrderItem = false;
-				}				
+				}			
+				
+				$kardex = "INSERT INTO kardex (concept, date, quantity, balance, product_id) VALUES ('Ingreso a factura', '$orderDate', ".$producQuantityData['quantity'].", '-".$products['quantity_tmp']."', ".$products['product_id'].")";
+				$fact = $connect->query($kardex);
 	}
 	 if($insertOrder == true && $updateStock == true && $insertOrderItem == true){
 		$valid['success'] = true;

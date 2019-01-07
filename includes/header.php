@@ -58,7 +58,9 @@
 
         <li id="navCategories"><a href="categories.php"> <i class="glyphicon glyphicon-th-list"></i> Categorías</a></li>        
 
-        <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-tasks"></i> Productos </a></li>     
+        <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-tasks"></i> Inventario </a></li>   
+
+            <li id="navProduct"><a href="kardex.php"> <i class="glyphicon glyphicon-book"></i> Kardex </a></li>    
 
         <li class="dropdown" id="navOrder">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Ventas <span class="caret"></span></a>
@@ -70,11 +72,13 @@
 
         <li class="dropdown" id="navOutlay">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-usd"></i> Compras <span class="caret"></span></a>
-          <ul class="dropdown-menu">            
-          <li id="managerOutlay"><a href="outlay.php"> <i class="glyphicon glyphicon-edit"></i> Gestionar compras </a></li>            
-          <li id="addOutlay"><a href="addOutlay.php"> <i class="glyphicon glyphicon-plus"></i> Agregar compras </a></li>            
+          <ul class="dropdown-menu">                       
+          <li id="addOutlay"><a href="addOutlay.php"> <i class="glyphicon glyphicon-plus"></i> Agregar compras </a></li>  
+          <li id="managerOutlay"><a href="outlay.php"> <i class="glyphicon glyphicon-edit"></i> Gestionar compras </a></li>           
           </ul>
         </li> 
+
+        <li id="navProduct"><a href="costumers.php"> <i class="glyphicon glyphicon-user"></i> Clientes </a></li>
         
 
         <li class="dropdown" id="navSetting">
