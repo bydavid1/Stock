@@ -14,6 +14,7 @@ if($_POST) {
   $brandName 			= $_POST['brandName'];
   $categoryName 	= $_POST['categoryName'];
   $productStatus 	= $_POST['productStatus'];
+  $typeProd 	= $_POST['type'];
 
 	$type = explode('.', $_FILES['productImage']['name']);
 	$type = $type[count($type)-1];		
@@ -22,11 +23,11 @@ if($_POST) {
 		if(is_uploaded_file($_FILES['productImage']['tmp_name'])) {			
 			if(move_uploaded_file($_FILES['productImage']['tmp_name'], $url)) {
 				
-				$sql = "INSERT INTO product (cod_product, product_name, product_image, brand_id, categories_id, quantity, rate, active, status) 
-				VALUES ('$codProduct','$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1)";
+				$sql = "INSERT INTO product (cod_product, type, product_name, product_image, brand_id, categories_id, quantity, rate, active, status) 
+				VALUES ('$codProduct', '$typeProd', '$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1)";
 
 				if($connect->query($sql) === TRUE) {
-					$valid['success'] = true;
+					$valid['success'] = TRUE;
 					$valid['messages'] = "Creado exitosamente";	
 				} else {
 					$valid['success'] = false;
@@ -37,7 +38,9 @@ if($_POST) {
 				return false;
 			}	// /else	
 		} // if
-	} // if in_array 		
+	} // if in_array 
+	
+
 
 	$connect->close();
 

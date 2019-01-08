@@ -1,6 +1,6 @@
 <!-- add product -->
 <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
     	<form class="form-horizontal" id="submitProductForm" action="php_action/createProduct.php" method="POST" enctype="multipart/form-data">
@@ -13,11 +13,11 @@
 
 	      	<div id="add-product-messages"></div>
 
+
 	      	<div class="form-group">
 	        	<label for="productImage" class="col-sm-3 control-label">Imagen: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-					    <!-- the avatar markup -->
 							<div id="kv-avatar-errors-1" class="center-block" style="display:none;"></div>							
 					    <div class="kv-avatar center-block">					        
 					        <input type="file" class="form-control" id="productImage" placeholder="Imagen del producto" name="productImage" class="file-loading" style="width:auto;"/>
@@ -25,6 +25,7 @@
 				      
 				    </div>
 	        </div> <!-- /form-group-->
+					<div class='col-sm-6'>
 
 					<div class="form-group">
 	        	<label for="codProduct" class="col-sm-3 control-label">Codigo: </label>
@@ -56,7 +57,10 @@
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="rate" placeholder="Precio" name="rate" autocomplete="off">
 				    </div>
-	        </div> <!-- /form-group-->	     	        
+	        </div> <!-- /form-group-->
+
+					</div>
+					<div class='col-sm-6'>	     	        
 
 	        <div class="form-group">
 	        	<label for="brandName" class="col-sm-3 control-label">Fabricante: </label>
@@ -101,12 +105,25 @@
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <select class="form-control" id="productStatus" name="productStatus">
-				      	<option value="">-- Selecciona --</option>
 				      	<option value="1">Disponible</option>
 				      	<option value="2">No disponible</option>
 				      </select>
 				    </div>
-	        </div> <!-- /form-group-->	         	        
+	        </div> <!-- /form-group-->	
+					<div class="form-group">
+	        	<label for="productStatus" class="col-sm-3 control-label">Tipo: </label>
+	        	<label class="col-sm-1 control-label">: </label>
+				    <div class="col-sm-8">
+				      <select class="form-control" id="type" name="type">
+				      	<option value="1">Fisico</option>
+				      	<option value="2">Servicio</option>
+								<option value="3">No especificado</option>
+				      </select>
+				    </div>
+	        </div> <!-- /form-group--> 
+
+					</div>
+
 	      </div> <!-- /modal-body -->
 	      
 	      <div class="modal-footer">

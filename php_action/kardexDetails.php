@@ -6,6 +6,16 @@ $sql = "SELECT * FROM product WHERE product_id = $id";
 $result = $connect->query($sql);
 
 while($row = $result->fetch_array()) {
+
+    if($row['type'] == 1) {
+        // activate member
+        $type = "Fisico";
+    } else if($row['type'] == 2){
+        // deactivate member
+        $type = "Servicio";
+    } else{
+        $type = "No especificado";
+    }
 ?>
 
 <form class="form-horizontal">
@@ -28,13 +38,13 @@ while($row = $result->fetch_array()) {
                     <div class="form-group">
                  <label for="code" class="col-sm-3 control-label">Precio</label>
                    <div class="col-sm-8">
-                  <input type="text" class="form-control" id="rate" name="rate" disabled value="<?php echo $row['rate']?>"  />
+                  <input type="text" class="form-control" id="rate" name="rate" disabled value="<?php echo '$'.number_format($row['rate'], 2)?>"  />
                  </div>
                   </div> <!--/form-group-->
                   <div class="form-group">
                  <label for="code" class="col-sm-3 control-label">Tipo</label>
                    <div class="col-sm-8">
-                  <input type="text" class="form-control" id="type" name="type" disabled value="<?php echo $row['type']?>"  />
+                  <input type="text" class="form-control" id="type" name="type" disabled value="<?php echo $type?>"  />
                  </div>
                   </div> <!--/form-group-->
                  </div>

@@ -48,6 +48,15 @@ $(document).ready(function() {
 			var brandName = $("#brandName").val();
 			var categoryName = $("#categoryName").val();
 			var productStatus = $("#productStatus").val();
+			var type = $("#type").val();
+
+			// form validation 
+			if(type == "") {
+				$("#type").after('<p class="text-danger"> Este campo es obligatorio </p>');
+				$('#type').closest('.form-group').addClass('has-error');
+			} else {
+				$('#type').closest('.form-group').addClass('has-success');
+			} // /else
 
 			// form validation 
 			if(codProduct == "") {
@@ -143,7 +152,7 @@ $(document).ready(function() {
 					contentType: false,
 					processData: false,
 					success:function(response) {
-
+                     console.log(response);
 						if(response.success == true) {
 							// submit loading button
 							$("#createProductBtn").button('reset');

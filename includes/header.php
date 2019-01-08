@@ -78,6 +78,14 @@
           </ul>
         </li> 
 
+        <li class="dropdown" id="navOutlay">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-retweet"></i> Devoluciones <span class="caret"></span></a>
+          <ul class="dropdown-menu">                       
+          <li id="addReturn"><a href="addReturn.php"> <i class="glyphicon glyphicon-plus"></i> Agregar devolucion </a></li>  
+          <li id="manageReturn"><a href="returns.php"> <i class="glyphicon glyphicon-edit"></i> Gestionar devoluciones </a></li>           
+          </ul>
+        </li> 
+
         <li id="navProduct"><a href="costumers.php"> <i class="glyphicon glyphicon-user"></i> Clientes </a></li>
         
 
