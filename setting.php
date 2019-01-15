@@ -16,7 +16,7 @@ $connect->close();
 		  <li class="active">Configuración</li>
 		</ol>
 
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<div class="page-heading"> <i class="glyphicon glyphicon-wrench"></i> Configuración</div>
 			</div> <!-- /panel-heading -->

@@ -10,7 +10,7 @@
 		  <li class="active">Compras</li>
 		</ol>
 
-		<div class="panel panel-default">
+		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<div class="page-heading"> <i class="glyphicon glyphicon-edit"></i> Listado de compras</div>
 			</div> <!-- /panel-heading -->

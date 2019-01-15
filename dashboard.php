@@ -87,14 +87,6 @@ $connect->close();
 		</div> <!--/panel-->
 	</div> <!--/col-md-4-->
 
-	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading"> <i class="glyphicon glyphicon-calendar"></i> Calendario</div>
-			<div class="panel-body">
-				<div id="calendar"></div>
-			</div>	
-		</div>
-	</div>
 
 	<div class="col-md-6">
 		<div class="panel panel-default">
@@ -141,9 +133,6 @@ $connect->close();
 	
 </div> <!--/row-->
 
-<!-- fullCalendar 2.2.5 -->
-<script src="assests/plugins/moment/moment.min.js"></script>
-<script src="assests/plugins/fullcalendar/fullcalendar.js"></script>
 <!--Charts -->
 <script src="custom/Charts/dist/Chart.bundle.js"></script>
 <script src="custom/Charts/samples/utils.js"></script>
@@ -153,25 +142,6 @@ $connect->close();
 	$(function () {
 			// top bar active
 	$('#navDashboard').addClass('active');
-
-      //Date for the calendar events (dummy data)
-      var date = new Date();
-      var d = date.getDate(),
-      m = date.getMonth(),
-      y = date.getFullYear();
-	 
-      $('#calendar').fullCalendar({
-		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-		dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
-        header: {
-          left: '',
-          center: 'title'
-        },
-        buttonText: {
-          today: 'today',
-          month: 'month'          
-        }        
-      });
 
 
 		});

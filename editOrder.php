@@ -14,7 +14,7 @@ include 'modal/productsOrder.php';
    </li>
 </ol>
 
-<div class="panel panel-default">
+<div class="panel panel-primary">
 	<div class="panel-heading">
 
 			<i class='glyphicon glyphicon-edit'></i> Editar venta

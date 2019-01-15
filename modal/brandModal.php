@@ -12,42 +12,42 @@
 	      	<div id="add-brand-messages"></div>
 
 	        <div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">Codigo: </label>
+	        	<label for="brandName" class="col-sm-3 control-label">Codigo </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="brandCode" placeholder="Codigo del proveedor" name="brandCode" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->
 					<div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">Nombre: </label>
+	        	<label for="brandName" class="col-sm-3 control-label">Nombre </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="brandName" placeholder="Nombre del proveedor" name="brandName" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	  
 					<div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">Telefono: </label>
+	        	<label for="brandName" class="col-sm-3 control-label">Telefono </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="phone" placeholder="Telefono del proveedor" name="phone" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	
 					<div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">NIT: </label>
+	        	<label for="brandName" class="col-sm-3 control-label">NIT </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <input type="text" class="form-control" id="nit" placeholder="NIT del proveedor" name="nit" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	
 					<div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">Direccion: </label>
+	        	<label for="brandName" class="col-sm-3 control-label">Direccion </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <textarea class="form-control" id="address" placeholder="Direccion del proveedor" name="address"></textarea>
 				    </div>
 	        </div> <!-- /form-group-->	       	        
 	        <div class="form-group">
-	        	<label for="brandStatus" class="col-sm-3 control-label">Estado: </label>
+	        	<label for="brandStatus" class="col-sm-3 control-label">Estado </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <select class="form-control" id="brandStatus" name="brandStatus">

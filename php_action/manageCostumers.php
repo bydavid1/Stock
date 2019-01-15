@@ -64,11 +64,11 @@
 			<div class="table-responsive">
 			  <table class="table">
 				<tr  class="info">
+				    <th>Codigo</th>
 					<th>Nombre</th>
 					<th>Teléfono</th>
 					<th>Email</th>
 					<th>Dirección</th>
-					<th>Estado</th>
 					<th>Agregado</th>
 					<th class='text-right'>Acciones</th>
 					
@@ -76,30 +76,26 @@
 				<?php
 				while ($row=mysqli_fetch_array($query)){
 						$id_cliente=$row['id_cliente'];
+						$codigo=$row['code'];
 						$nombre_cliente=$row['nombre_cliente'];
 						$telefono_cliente=$row['telefono_cliente'];
 						$email_cliente=$row['email_cliente'];
 						$direccion_cliente=$row['direccion_cliente'];
-						$status_cliente=$row['status_cliente'];
-						if ($status_cliente==1){$estado="Activo";}
-						else {$estado="Inactivo";}
 						$date_added= date('d/m/Y', strtotime($row['date_added']));
 						
 					?>
-					
+					<input type="hidden" value="<?php echo $codigo;?>" id="nombre_cliente<?php echo $id_cliente;?>">
 					<input type="hidden" value="<?php echo $nombre_cliente;?>" id="nombre_cliente<?php echo $id_cliente;?>">
 					<input type="hidden" value="<?php echo $telefono_cliente;?>" id="telefono_cliente<?php echo $id_cliente;?>">
 					<input type="hidden" value="<?php echo $email_cliente;?>" id="email_cliente<?php echo $id_cliente;?>">
 					<input type="hidden" value="<?php echo $direccion_cliente;?>" id="direccion_cliente<?php echo $id_cliente;?>">
-					<input type="hidden" value="<?php echo $status_cliente;?>" id="status_cliente<?php echo $id_cliente;?>">
 					
 					<tr>
-						
+					    <td><?php echo $codigo; ?></td>
 						<td><?php echo $nombre_cliente; ?></td>
 						<td ><?php echo $telefono_cliente; ?></td>
 						<td><?php echo $email_cliente;?></td>
 						<td><?php echo $direccion_cliente;?></td>
-						<td><?php echo $estado;?></td>
 						<td><?php echo $date_added;?></td>
 						
 					<td ><span class="pull-right">

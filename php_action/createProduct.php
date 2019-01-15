@@ -15,6 +15,7 @@ if($_POST) {
   $categoryName 	= $_POST['categoryName'];
   $productStatus 	= $_POST['productStatus'];
   $typeProd 	= $_POST['type'];
+  $date      = date("d/m/y");
 
 	$type = explode('.', $_FILES['productImage']['name']);
 	$type = $type[count($type)-1];		
@@ -25,8 +26,12 @@ if($_POST) {
 				
 				$sql = "INSERT INTO product (cod_product, type, product_name, product_image, brand_id, categories_id, quantity, rate, active, status) 
 				VALUES ('$codProduct', '$typeProd', '$productName', '$url', '$brandName', '$categoryName', '$quantity', '$rate', '$productStatus', 1)";
-
-				if($connect->query($sql) === TRUE) {
+                $res = $connect->query($sql);
+				$product_id = $connect->insert_id;
+				
+                $kardex = "INSERT INTO kardex (concept, date, quantity, balance, product_id) VALUES ('Inicio en inventario', $date, $quantity, '0', $product_id)";
+                $fact = $connect->query($kardex);
+				if($res > 0 && $fact > 0) {
 					$valid['success'] = TRUE;
 					$valid['messages'] = "Creado exitosamente";	
 				} else {

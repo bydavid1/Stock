@@ -47,6 +47,9 @@
 				</div>
 			  </div>
 
+        </div>
+				<div class='col-sm-6' style='margin-top: 10px;'>
+
 				<div class="form-group">
 				<label for="direccion" class="col-sm-3 control-label">Dirección</label>
 				<div class="col-sm-8">
@@ -54,9 +57,6 @@
 				  
 				</div>
 			  </div>
-
-        </div>
-				<div class='col-sm-6' style='margin-top: 10px;'>
 			  
 				<div class="form-group">
 				<label for="telefono" class="col-sm-3 control-label">Ciudad</label>
@@ -70,15 +70,6 @@
 				  <input type="text" class="form-control" id="departament" name="departament" autocomplete='off'>
 				</div>
 			  </div>
-			  <div class="form-group">
-				<label for="estado" class="col-sm-3 control-label">Estado</label>
-				<div class="col-sm-8">
-				 <select class="form-control" id="estado" name="estado" required>
-					<option value="1" selected>Activo</option>
-					<option value="0">Inactivo</option>
-				  </select>
-				</div>
-			  </div>
 
 				<div class="form-group">
 				<label for="telefono" class="col-sm-3 control-label">Max. Credito</label>
@@ -90,24 +81,14 @@
 				<div class="form-group">
 				<label for="estado" class="col-sm-3 control-label">Terminos</label>
 				<div class="col-sm-8">
-				 <select class="form-control" id="estado" name="estado" required>
+				 <select class="form-control" id="terminos" name="terminos" required>
 					<option value="1" selected>Efectivo</option>
-					<option value="0">Credito</option>
-					<option value="0">15 dias</option>
-					<option value="0">30 dias</option>
-					<option value="0">60 dias</option>
-					<option value="0">90 dias</option>
+					<option value="credito">Credito</option>
+					<option value="15 dias">15 dias</option>
+					<option value="30 dias">30 dias</option>
+					<option value="60 dias">60 dias</option>
+					<option value="90 dias">90 dias</option>
 				  </select>
-				</div>
-			  </div>
-
-				<div class="form-group">
-				<label for="telefono" class="col-sm-3 control-label">Vendedor</label>
-				<div class="col-sm-6">
-				  <input type="text" class="form-control" id="vendedor" name="vendedor" autocomplete='off'>
-				</div>
-				<div class="col-sm-2">
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#searchProvider"> <i class="glyphicon glyphicon-search"></i> </button>
 				</div>
 			  </div>
 

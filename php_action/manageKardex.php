@@ -19,7 +19,7 @@
            $sWhere = substr_replace( $sWhere, "", -3 );
            $sWhere .= ')';
        }
-       $sWhere.=" order by cod_product";
+       $sWhere.="WHERE status = 1 order by cod_product";
        include 'pagination.php'; //include pagination file
        //pagination variables
        $page = (isset($_REQUEST['page']) && !empty($_REQUEST['page']))?$_REQUEST['page']:1;

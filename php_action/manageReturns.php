@@ -52,7 +52,7 @@
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
-                        $id_return=$row['id_return'];
+                        $id_return=$row['return_id'];
                         $date=$row['date'];
 						$costumer=$row['costumer'];
 						$quantity=$row['quantity'];

@@ -13,7 +13,7 @@ include 'modal/providerModal.php'; ?>
    </li>
 </ol>
 
-<div class="panel panel-default">
+<div class="panel panel-primary">
 	<div class="panel-heading">
 
 			<i class='glyphicon glyphicon-circle-arrow-right'></i> Agregar compra

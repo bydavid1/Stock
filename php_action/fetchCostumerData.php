@@ -41,8 +41,9 @@ require_once 'core.php';
 				<tr  class="warning">
 					<th>Nombre</th>
 					<th>Telefono</th>
-					<th><span class="pull-right">Agregado</span></th>
-					<th><span class="pull-right">Direccion</span></th>
+					<th>Agregado</th>
+					<th>Direccion</th>
+					<th>Agregar</th>
 				</tr>
 				<?php
 				while ($row=mysqli_fetch_array($query)){
@@ -58,6 +59,8 @@ require_once 'core.php';
 						<td><?php echo $telefono_cliente; ?></td>
                         <td><?php echo $date_added; ?></td>
                         <td><?php echo $direccion_cliente; ?></td>
+						<td><a class='btn btn-info'href="#" onclick="success('<?php echo $id_cliente ?>')"><i class="glyphicon glyphicon-plus"></i></a></td>
+
                     </tr>
 					<?php
 				}
@@ -72,5 +75,18 @@ require_once 'core.php';
 			</div>
 			<?php
 		}
-	}
+	}else if($action == 'add'){
+		$valid['success'] = array('name' => array(), 'nit' => array());
+        $value = mysqli_real_escape_string($connect,(strip_tags($_REQUEST['valueSend'], ENT_QUOTES)));
+        $query = "SELECT nombre_cliente, nit FROM clientes WHERE id_cliente = '$value'";
+        $result = mysqli_query($connect, $query);
+        $d = mysqli_fetch_array($result);
+        $name = $d['nombre_cliente'];
+        $nit = $d['nit'];
+
+        $valid['name'] = $name;
+        $valid['nit'] = $nit;
+
+        echo json_encode($valid);
+    }
 ?>

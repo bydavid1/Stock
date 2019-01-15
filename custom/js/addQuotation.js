@@ -1,19 +1,13 @@
 $(document).ready(function() {
-	
-	load(1);
+
+    load(1);
 	load(2);
 
 	var divRequest = $(".div-request").text();
 
-		// top nav bar 
-		$("#addReturn").addClass('active');
-		// add order	
-		// top nav child bar 
-		$('#navReturn').addClass('active');	
+	$("#quotationDate").datepicker();	
 
-	$("#returnDate").datepicker();	
-
-    $("#createReturnForm").unbind('submit').bind('submit', function() {
+    $("#createQuotationForm").unbind('submit').bind('submit', function() {
 
         var form = $(this);
 
@@ -23,7 +17,7 @@ $(document).ready(function() {
 				
 			var costumer = $("#costumer").val();
 			var nit = $("#nit").val();
-			var returnDate = $("#returnDate").val();
+			var outlayDate = $("#outlayDate").val();
 			var grandQuantity = $("#grandQuantity").val();
 			var grandTotal = $("#grandTotal").val();
 			
@@ -44,11 +38,11 @@ $(document).ready(function() {
 				$('#nit').closest('.form-group').addClass('has-success');
 			} // /else
 
-			if(returnDate == "") {
-				$("#returnDate").after('<p class="text-danger"> Este campo es obligatorio </p>');
-				$('#returnDate').closest('.form-group').addClass('has-error');
+			if(outlayDate == "") {
+				$("#outlayDate").after('<p class="text-danger"> Este campo es obligatorio </p>');
+				$('#outlayDate').closest('.form-group').addClass('has-error');
 			} else {
-				$('#returnDate').closest('.form-group').addClass('has-success');
+				$('#outlayDate').closest('.form-group').addClass('has-success');
 			} // /else
 
 			if(grandQuantity == "") {
@@ -154,7 +148,7 @@ $(document).ready(function() {
 		   tableRow = $("#outlayTable tbody tr:last").attr('id');
 		   count = tableRow.substring(3);	
 		   $('#trCount').val(count); 
-		  if(returnDate && grandQuantity && grandTotal && nit && costumer){ 
+		  if(outlayDate && grandQuantity && grandTotal && nit && provider){ 
 			if(validateProduct == true && validateQuantity == true  && validateRate == true && validateTotal == true) {
 
 				$.ajax({
@@ -168,7 +162,7 @@ $(document).ready(function() {
 					success:function(response) {
 						// reset button
 						console.log(response);
-						$("#createReturn").button('reset');
+						$("#createOutlay").button('reset');
 						
 						$(".text-danger").remove();
 						$('.form-group').removeClass('has-error').removeClass('has-success');
@@ -406,7 +400,6 @@ function addRow() {
 					success:function(data){
 						console.log(data);
 						$("#costumer").val(data.name);
-						$("#nit").val(data.nit);	
 					}
 				})
 		

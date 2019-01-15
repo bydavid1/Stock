@@ -47,7 +47,7 @@
 	        	<label for="quantity" class="col-sm-3 control-label">Stock: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="quantity" placeholder="Stock" name="quantity" autocomplete="off">
+				      <input type="number" class="form-control" id="quantity" placeholder="Stock" name="quantity" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	        	 
 
@@ -55,7 +55,7 @@
 	        	<label for="rate" class="col-sm-3 control-label">Precio: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="rate" placeholder="Precio" name="rate" autocomplete="off">
+				      <input type="decimal" class="form-control" id="rate" placeholder="Precio" name="rate" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->
 

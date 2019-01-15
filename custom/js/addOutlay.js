@@ -571,7 +571,4 @@ function agregar(id) {
 		}
 	})
 
-			
-	
-
 		} // /success

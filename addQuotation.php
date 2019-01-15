@@ -1,70 +1,55 @@
 <?php require_once 'includes/header.php'; 
  require_once 'php_action/db_connect.php'; 
-include 'modal/productsOrder.php';  
-include 'modal/costumerModal.php'; ?> 
+include 'modal/productsOrder.php'; 
+include 'modal/costumerModal.php';  ?> 
 
 <div class='div-request div-hide'>add</div>
 
 <ol class="breadcrumb">
   <li><a href="dashboard.php">Inicio</a></li>
-  <li>Devoluciones</li>
+  <li>Cotizaciones</li>
   <li class="active">
-    Agregar devolucion
+    Agregar cotizacion
    </li>
 </ol>
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
 
-			<i class='glyphicon glyphicon-circle-arrow-right'></i> Agregar devolucion
+			<i class='glyphicon glyphicon-circle-arrow-right'></i> Agregar cotizacion
 
 	</div> <!--/panel-->	
 	<div class="panel-body">
       <div class="success-messages"></div> <!--/success-messages-->
 
-      <form class="form-horizontal" method="POST" action="php_action/createReturn.php" id="createReturnForm">
+      <form class="form-horizontal" method="POST" action="php_action/createQuotation.php" id="createQuotationForm">
 
   <div class="col-sm-6">
     <div class="form-group">
-        <label for="outlayDate" class="col-sm-3 control-label">Fecha de devolucion</label>
+        <label for="quotationDate" class="col-sm-3 control-label">Fecha de cotizacion</label>
         <div class="col-sm-8">
-           <input type="text" class="form-control" id="returnDate" name="returnDate" autocomplete="off" value="<?php echo date("m/d/Y");?>"/>
+           <input type="text" class="form-control" id="quotationDate" name="quotationDate" autocomplete="off" value="<?php echo date("m/d/Y");?>"/>
         </div>
     </div> <!--/form-group-->
     <div class="form-group col-sm-12">
-       <label for="clientName" class="col-sm-3 control-label">Devuelto por:</label>
+       <label for="clientName" class="col-sm-3 control-label">Dirigido a:</label>
         <div class="col-sm-7">
-	     <input type="text" class="form-control" id="costumer" name="costumer" placeholder="Devuelto por" autocomplete="off" onchange="success()"/>
+	     <input type="text" class="form-control" id="costumer" name="costumer" placeholder="Dirigido a" autocomplete="off" onchange="success()"/>
        </div>
-       <div class="input-group-append">
-       <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#searchCostumer"> <i class="glyphicon glyphicon-search"></i> </button>
+       <div class="col-sm-2">
+         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#searchCostumer"> <i class="glyphicon glyphicon-search"></i> </button>
        </div>
     </div><!--/form-group-->
-    <div class="form-group">
-      <label for="description" class="col-sm-3 control-label">NIT</label>
-      <div class="col-sm-8">
-        <input type="text" class="form-control" id="nit" name="nit" placeholder="NIT" autocomplete="off"  />
-      </div>
-    </div> <!--/form-group-->
    </div> 
 
    <div class="col-sm-6">
    <div class="form-group">
-      <label for="description" class="col-sm-2 control-label">Comentarios</label>
+      <label for="description" class="col-sm-2 control-label">Descripcion</label>
       <div class="col-sm-8">
         <textarea  class="form-control" id="description" name="description" placeholder="Descripcion" autocomplete="off">
         </textarea>
       </div>
     </div> <!--/form-group-->
-       <div class="form-group">
-    <label class='col-sm-2 control-label'>Estado</label>
-    <div class="col-sm-8">
-	<select class="form-control text-right" name="paymentStatus" id="paymentStatus">
-				      	<option value="1" >Pagado</option>
-				      	<option value="2" >No pagado</option>
-	</select>
-    </div>
-       </div>
        </div>
 
 	<table class="table" id="outlayTable">
@@ -158,7 +143,7 @@ include 'modal/costumerModal.php'; ?>
 			    <div class="col-sm-offset-2 col-sm-10">
 				<button type="button" class="btn btn-default" onclick="addRow()" id="addRowBtn" data-loading-text="cargando..."> <i class="glyphicon glyphicon-plus-sign"></i> Añadir fila </button>
 
-	            <button type="submit" class="btn btn-primary" id="createReturn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Guardar cambios</button>
+	            <button type="submit" class="btn btn-primary" id="createOutlay" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Guardar cambios</button>
           
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addProductsModal"><span class="glyphicon glyphicon-search"></span> Ver productos</button>
 
@@ -168,6 +153,6 @@ include 'modal/costumerModal.php'; ?>
 	       
      	</form> <!-- /.form -->	     
 
-			 <script src="custom/js/addReturn.js"></script>
+			 <script src="custom/js/addQuotation.js"></script>
 
        <?php require_once 'includes/footer.php'; ?>

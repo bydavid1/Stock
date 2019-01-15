@@ -136,7 +136,7 @@ $(document).ready(function() {
 				$("#productStatus").closest('.form-group').addClass('has-success');	  	
 			}	// /else
 
-			if(codProduct && productImage && productName && quantity && rate && brandName && categoryName && productStatus) {
+			if(codProduct && productImage && productName && quantity && rate && brandName && categoryName && productStatus && type) {
 				// submit loading button
 				$("#createProductBtn").button('loading');
 
@@ -182,6 +182,11 @@ $(document).ready(function() {
 							// remove from-group error
 							$(".form-group").removeClass('has-error').removeClass('has-success');
 
+						}else{
+							$('#add-product-messages').html('<div class="alert alert-danger">'+
+							'<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+							'<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
+						  '</div>');
 						} // /if response.success
 						
 					} // /success function
